@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/src/assets/logo-educonnect.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduConnect</title>
+  </head>
+  <body>
+    <script>
+      // Anti-flash: aplica preferências de acessibilidade antes da renderização
+      const isDarkMode = localStorage.getItem('educonnect-dark-mode') === 'true';
+      const isHighContrast = localStorage.getItem('educonnect-high-contrast') === 'true';
+      const fontSize = localStorage.getItem('educonnect-font-size') || 'media';
+      const root = document.documentElement;
+
+      if (isDarkMode) root.classList.add('dark');
+      if (isHighContrast) root.classList.add('high-contrast');
+
+      root.classList.remove('font-size-pequena', 'font-size-media', 'font-size-grande');
+      if (fontSize === 'pequena') {
+        root.classList.add('font-size-pequena');
+        root.style.fontSize = '14px';
+      } else if (fontSize === 'grande') {
+        root.classList.add('font-size-grande');
+        root.style.fontSize = '18px';
+      } else {
+        root.classList.add('font-size-media');
+        root.style.fontSize = '16px';
+      }
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
