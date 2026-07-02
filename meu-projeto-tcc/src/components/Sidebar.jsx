@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Home, Search, User, Settings, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { useLanguage } from '../hooks/useLanguage';
+import logoEduconnect from '../assets/logo-educonnect.png';
 
 export default function Sidebar() {
   const [userId, setUserId] = useState(null);
@@ -35,7 +36,7 @@ export default function Sidebar() {
         
         {/* LOGO DO EDUCONNECT (só ícone) */}
         <div className="mb-2">
-          <img src="/src/assets/logo-educonnect.png" alt="EduConnect" className="w-8 h-8 object-contain" />
+          <img src={logoEduconnect} alt="EduConnect" className="w-8 h-8 object-contain" />
         </div>
 
         {/* LINKS DE NAVEGAÇÃO */}

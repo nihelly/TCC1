@@ -11,6 +11,8 @@ export default defineConfig({
     host: true,
   },
   build: {
-    minify: false
+    minify: false,
+    cssMinify: false,
+    sourcemap: false
   }
 })

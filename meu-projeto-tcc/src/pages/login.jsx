@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { toast } from 'sonner';
 import GeometricBackground from '../components/GeometricBackground';
+import logoEduconnect from '../assets/logo-educonnect.png';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function Login() {
         
         {/* Logo EduConnect */}
         <div className="mb-6">
-          <img src="/src/assets/logo-educonnect.png" alt="EduConnect" className="w-20 h-20 object-contain mx-auto" />
+          <img src={logoEduconnect} alt="EduConnect" className="w-20 h-20 object-contain mx-auto" />
         </div>
 
         {/* Textos Principais */}

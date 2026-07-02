@@ -376,7 +376,7 @@ export default function Mensagens() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.01)] overflow-hidden h-[calc(100dvh-180px)] md:h-[600px] min-h-[450px] relative">
+      <div className="grid grid-cols-1 md:grid-cols-3 bg-white border border-gray-100 rounded-[2.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.01)] overflow-hidden h-[calc(100dvh-150px)] md:h-[calc(100dvh-220px)] min-h-[500px] md:min-h-[680px] relative">
         
         {/* COLUNA ESQUERDA: LISTA DE CONTATOS */}
         <div className={`border-r border-gray-100 flex flex-col bg-gray-50 dark:bg-[#0b0a12] p-4 space-y-3 ${destinatario ? 'hidden md:flex' : 'flex'}`}>
