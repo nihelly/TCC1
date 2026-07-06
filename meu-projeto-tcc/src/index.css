@@ -147,10 +147,67 @@ html.dark .hover\:bg-gray-100:hover { background-color: #191629 !important; }
 html.dark .hover\:bg-gray-200:hover { background-color: #231f3a !important; }
 html.dark .hover\:bg-gray-200\/80:hover { background-color: rgba(35, 31, 58, 0.8) !important; }
 
-/* ─── Scrollbar no escuro ─── */
-html.dark ::-webkit-scrollbar { width: 6px; }
-html.dark ::-webkit-scrollbar-track { background: #06050a; }
-html.dark ::-webkit-scrollbar-thumb { background: #191629; border-radius: 3px; }
+/* ─── Scrollbar Global (Claro e Escuro) ─── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6; /* cinza bem claro */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* cinza claro */
+  border-radius: 9999px;
+  border: 2px solid #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Scrollbar no escuro */
+html.dark ::-webkit-scrollbar-track {
+  background: #0c0b12;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3b3754;
+  border-color: #0c0b12;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4e496e;
+}
+
+/* Scrollbar no Alto Contraste Claro */
+html.high-contrast:not(.dark) ::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+html.high-contrast:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-color: #ffffff;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+}
+
+/* Scrollbar no Alto Contraste Escuro */
+html.high-contrast.dark ::-webkit-scrollbar-track {
+  background: #000000;
+}
+html.high-contrast.dark ::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-color: #000000;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+}
 
 /* ─── Backdrop blur no escuro ─── */
 html.dark .bg-white\/80 { background-color: rgba(12, 11, 18, 0.85) !important; }
