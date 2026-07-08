@@ -69,8 +69,13 @@ export default function EditarPerfil() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error('A imagem deve ter no máximo 2MB.');
+      const formatosPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+      if (!formatosPermitidos.includes(file.type)) {
+        toast.error('Formato inválido. Selecione uma imagem JPG, JPEG, PNG ou WEBP.');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('A imagem deve ter no máximo 5MB.');
         return;
       }
       setImageFile(file);
@@ -81,6 +86,11 @@ export default function EditarPerfil() {
   const handleBannerChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      const formatosPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+      if (!formatosPermitidos.includes(file.type)) {
+        toast.error('Formato inválido. Selecione uma imagem JPG, JPEG, PNG ou WEBP.');
+        return;
+      }
       if (file.size > 5 * 1024 * 1024) {
         toast.error('O banner deve ter no máximo 5MB.');
         return;
@@ -117,7 +127,7 @@ export default function EditarPerfil() {
           .from('avatars')
           .getPublicUrl(filePath);
 
-        novaAvatarUrl = publicUrl;
+        novaAvatarUrl = `${publicUrl}?t=${Date.now()}`;
       }
 
       // Upload banner
@@ -136,7 +146,7 @@ export default function EditarPerfil() {
           .from('avatars')
           .getPublicUrl(filePath);
 
-        novaBannerUrl = publicUrl;
+        novaBannerUrl = `${publicUrl}?t=${Date.now()}`;
       }
 
       // Atualizar dados na tabela 'profiles'

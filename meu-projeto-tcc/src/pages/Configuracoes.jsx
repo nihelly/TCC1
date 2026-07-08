@@ -155,19 +155,19 @@ export default function Configuracoes() {
         <div className="bg-white dark:bg-[#0c0b12] rounded-[2rem] shadow-[0_4px_25px_rgba(0,0,0,0.005)] border border-gray-100 dark:border-purple-500/10 overflow-hidden transition-all duration-300">
           <button 
             onClick={() => alternarAba('seguranca')}
-            className={`w-full flex items-center justify-between p-6 text-left transition-colors cursor-pointer ${
+            className={`w-full flex items-center justify-between p-4 sm:p-6 text-left transition-colors cursor-pointer ${
               abaAberta === 'seguranca' 
                 ? 'bg-gray-50/50 dark:bg-[#151322]/20' 
                 : 'hover:bg-gray-50/30 dark:hover:bg-[#151322]/10'
             }`}
           >
-            <div className="flex items-center gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13.5px]">
-              <div className="p-2 bg-blue-500/10 text-[#3b82f6] rounded-xl">
+            <div className="flex items-center gap-3 sm:gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13px] sm:text-[13.5px]">
+              <div className="p-2 bg-blue-500/10 text-[#3b82f6] rounded-xl flex-shrink-0">
                 <Shield size={16} />
               </div>
-              <span>{translate('security')}</span>
+              <span className="whitespace-nowrap">{translate('security')}</span>
             </div>
-            {abaAberta === 'seguranca' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+            {abaAberta === 'seguranca' ? <ChevronUp size={16} className="text-gray-400 flex-shrink-0" /> : <ChevronDown size={16} className="text-gray-400 flex-shrink-0" />}
           </button>
           
           {abaAberta === 'seguranca' && (
@@ -227,19 +227,19 @@ export default function Configuracoes() {
         <div className="bg-white dark:bg-[#0c0b12] rounded-[2rem] shadow-[0_4px_25px_rgba(0,0,0,0.005)] border border-gray-100 dark:border-purple-500/10 overflow-hidden transition-all duration-300">
           <button 
             onClick={() => alternarAba('privacidade')}
-            className={`w-full flex items-center justify-between p-6 text-left transition-colors cursor-pointer ${
+            className={`w-full flex items-center justify-between p-4 sm:p-6 text-left transition-colors cursor-pointer ${
               abaAberta === 'privacidade' 
                 ? 'bg-gray-50/50 dark:bg-[#151322]/20' 
                 : 'hover:bg-gray-50/30 dark:hover:bg-[#151322]/10'
             }`}
           >
-            <div className="flex items-center gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13.5px]">
-              <div className="p-2 bg-purple-500/10 text-[#8b5cf6] rounded-xl">
+            <div className="flex items-center gap-3 sm:gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13px] sm:text-[13.5px]">
+              <div className="p-2 bg-purple-500/10 text-[#8b5cf6] rounded-xl flex-shrink-0">
                 <Lock size={16} />
               </div>
-              <span>{translate('privacy')}</span>
+              <span className="whitespace-nowrap">{translate('privacy')}</span>
             </div>
-            {abaAberta === 'privacidade' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+            {abaAberta === 'privacidade' ? <ChevronUp size={16} className="text-gray-400 flex-shrink-0" /> : <ChevronDown size={16} className="text-gray-400 flex-shrink-0" />}
           </button>
           
           {abaAberta === 'privacidade' && (
@@ -301,12 +301,12 @@ export default function Configuracoes() {
 
         {/* ================= SEÇÃO: MODO NOTURNO ================= */}
         <div className="bg-white dark:bg-[#0c0b12] rounded-[2rem] shadow-[0_4px_25px_rgba(0,0,0,0.005)] border border-gray-100 dark:border-purple-500/10 overflow-hidden transition-all duration-300">
-          <div className="w-full flex items-center justify-between p-6">
-            <div className="flex items-center gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13.5px]">
-              <div className="p-2 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 rounded-xl">
+          <div className="w-full flex items-center justify-between p-4 sm:p-6">
+            <div className="flex items-center gap-3 sm:gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13px] sm:text-[13.5px]">
+              <div className="p-2 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 rounded-xl flex-shrink-0">
                 <Moon size={16} />
               </div>
-              <span>{translate('nightMode')}</span>
+              <span className="whitespace-nowrap">{translate('nightMode')}</span>
             </div>
             <CustomToggle 
               checked={modoNocturno} 
@@ -319,19 +319,19 @@ export default function Configuracoes() {
         <div className="bg-white dark:bg-[#0c0b12] rounded-[2rem] shadow-[0_4px_25px_rgba(0,0,0,0.005)] border border-gray-100 dark:border-purple-500/10 overflow-hidden transition-all duration-300">
           <button 
             onClick={() => alternarAba('acessibilidade')}
-            className={`w-full flex items-center justify-between p-6 text-left transition-colors cursor-pointer ${
+            className={`w-full flex items-center justify-between p-4 sm:p-6 text-left transition-colors cursor-pointer ${
               abaAberta === 'acessibilidade' 
                 ? 'bg-gray-50/50 dark:bg-[#151322]/20' 
                 : 'hover:bg-gray-50/30 dark:hover:bg-[#151322]/10'
             }`}
           >
-            <div className="flex items-center gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13.5px]">
-              <div className="p-2 bg-green-500/10 text-green-600 dark:text-green-400 rounded-xl">
+            <div className="flex items-center gap-3 sm:gap-3.5 text-gray-800 dark:text-gray-100 font-semibold text-[13px] sm:text-[13.5px]">
+              <div className="p-2 bg-green-500/10 text-green-600 dark:text-green-400 rounded-xl flex-shrink-0">
                 <Accessibility size={16} />
               </div>
-              <span>{translate('accessibility')}</span>
+              <span className="whitespace-nowrap">{translate('accessibility')}</span>
             </div>
-            {abaAberta === 'acessibilidade' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+            {abaAberta === 'acessibilidade' ? <ChevronUp size={16} className="text-gray-400 flex-shrink-0" /> : <ChevronDown size={16} className="text-gray-400 flex-shrink-0" />}
           </button>
           
           {abaAberta === 'acessibilidade' && (

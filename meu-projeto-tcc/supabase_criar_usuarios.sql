@@ -1,5 +1,5 @@
 -- ============================================================
--- ACADNET — CRIAÇÃO DOS 3 USUÁRIOS DE TESTE
+-- EDUCONNECT — CRIAÇÃO DOS 3 USUÁRIOS DE TESTE
 -- Execute DEPOIS do supabase_setup.sql
 -- ============================================================
 

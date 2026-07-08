@@ -345,3 +345,30 @@ html.high-contrast.dark *:focus {
 .text-\[17px\] { font-size: calc(17rem / 16) !important; }
 .text-\[20px\] { font-size: calc(20rem / 16) !important; }
 .text-\[30px\] { font-size: calc(30rem / 16) !important; }
+
+/* ═══════════════════════════════════════════════════
+   ACCESSIBILITY & LAYOUT LOCK: PREVENT GLOBAL BODY SCROLL IN CHAT
+   ═══════════════════════════════════════════════════ */
+html.overflow-hidden-page,
+html.overflow-hidden-page body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+}
+
+html.overflow-hidden-page main {
+  height: calc(100vh - 56px - 80px) !important; /* Mobile Fallback */
+  height: calc(100dvh - 56px - 60px) !important; /* Mobile with BottomNav */
+  overflow: hidden !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+@media (min-width: 768px) {
+  html.overflow-hidden-page main {
+    height: calc(100vh - 56px) !important;
+    height: calc(100dvh - 56px) !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}

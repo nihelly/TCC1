@@ -4,6 +4,7 @@ import { Megaphone, ArrowLeft, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { toast } from 'sonner';
 import { useLanguage } from '../hooks/useLanguage';
+import { TradutorInput, TradutorTextArea } from '../components/TradutorInput';
 
 export default function CriarAviso() {
   const { translate } = useLanguage();
@@ -121,11 +122,10 @@ export default function CriarAviso() {
         {/* Campo Disciplina / Matéria */}
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-gray-400 tracking-wider uppercase pl-1">{translate('subjectLabel')}</label>
-          <input 
-            type="text"
+          <TradutorInput 
             placeholder={translate('subjectPlaceholder')}
             value={materia}
-            onChange={(e) => setMateria(e.target.value.toUpperCase())} // Sempre caixa alta para o padrão do design
+            onChange={(val) => setMateria(val.toUpperCase())}
             className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-[12px] font-semibold text-gray-800 outline-none focus:border-gray-300 transition-colors"
           />
         </div>
@@ -133,11 +133,10 @@ export default function CriarAviso() {
         {/* Campo Título */}
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-gray-400 tracking-wider uppercase pl-1">{translate('announcementTitleLabel')}</label>
-          <input 
-            type="text"
+          <TradutorInput 
             placeholder={translate('announcementTitlePlaceholder')}
             value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
+            onChange={setTitulo}
             className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-[13px] font-bold text-gray-950 outline-none focus:border-gray-300 transition-colors placeholder:font-normal"
           />
         </div>
@@ -145,11 +144,11 @@ export default function CriarAviso() {
         {/* Campo Conteúdo detalhado */}
         <div className="space-y-1.5">
           <label className="text-[11px] font-bold text-gray-400 tracking-wider uppercase pl-1">{translate('announcementContentLabel')}</label>
-          <textarea 
+          <TradutorTextArea 
             rows={4}
             placeholder={translate('announcementContentPlaceholder')}
             value={conteudo}
-            onChange={(e) => setConteudo(e.target.value)}
+            onChange={setConteudo}
             className="w-full bg-gray-50 border border-gray-100 rounded-xl p-4 text-[12px] text-gray-600 font-light leading-relaxed outline-none resize-none focus:border-gray-300 transition-colors"
           />
         </div>

@@ -262,6 +262,18 @@ export default function Notificacoes() {
 
       setNotificacoes(data || []);
 
+      // AUTOMATICAMENTE marca todas as notificações como lidas no banco
+      const unreadIds = (data || []).filter(n => !n.is_read).map(n => n.id);
+      if (unreadIds.length > 0) {
+        await supabase
+          .from('notifications')
+          .update({ is_read: true })
+          .in('id', unreadIds);
+        
+        // Atualiza estado local
+        setNotificacoes(prev => prev.map(n => ({ ...n, is_read: true })));
+      }
+
       // Busca perfis para os atores das notificações em lote
       const actorIds = [...new Set((data || []).map(n => n.actor_id).filter(Boolean))];
       if (actorIds.length > 0) {
@@ -308,8 +320,15 @@ export default function Notificacoes() {
           }
         }
 
-        setNotificacoes(prev => [newNotif, ...prev]);
+        // Como o usuário está vendo a página de notificações, marca a nova como lida imediatamente
+        const newNotifRead = { ...newNotif, is_read: true };
+        setNotificacoes(prev => [newNotifRead, ...prev]);
         toast.info(`${t('newNotif')}: ${newNotif.content}`);
+
+        await supabase
+          .from('notifications')
+          .update({ is_read: true })
+          .eq('id', newNotif.id);
       })
       .subscribe();
 

@@ -4,6 +4,7 @@ import { ArrowLeft, X, Sparkles, UploadCloud } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 import { toast } from 'sonner';
 import { useLanguage } from '../hooks/useLanguage';
+import { TradutorInput, TradutorTextArea } from '../components/TradutorInput';
 
 export default function CriarPost() {
   const { translate } = useLanguage();
@@ -135,11 +136,10 @@ export default function CriarPost() {
             <label htmlFor="tituloPost" className="text-[12px] font-semibold text-gray-700 pl-1 block">
               {translate('postTitleLabel')}
             </label>
-            <input
+            <TradutorInput
               id="tituloPost"
-              type="text"
               value={titulo}
-              onChange={(e) => setTitulo(e.target.value)}
+              onChange={setTitulo}
               placeholder="Ex: Resumos de IHC para a P2"
               className="w-full bg-[#fcfcfc] border border-gray-100 rounded-2xl py-3 px-4 text-[13px] text-gray-800 outline-none focus:bg-white focus:border-black transition-all"
               maxLength={80}
@@ -151,10 +151,10 @@ export default function CriarPost() {
             <label htmlFor="corpoPost" className="text-[12px] font-semibold text-gray-700 pl-1 block">
               {translate('postContentLabel')}
             </label>
-            <textarea
+            <TradutorTextArea
               id="corpoPost"
               value={corpo}
-              onChange={(e) => setCorpo(e.target.value)}
+              onChange={setCorpo}
               placeholder={translate('postContentPlaceholder')}
               rows={4}
               className="w-full bg-[#fcfcfc] border border-gray-100 rounded-2xl py-3 px-4 text-[13px] text-gray-800 outline-none focus:bg-white focus:border-black transition-all resize-none leading-relaxed"

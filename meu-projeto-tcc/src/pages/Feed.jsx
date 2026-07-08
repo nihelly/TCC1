@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabaseClient';
 import { Anuncios } from '../components/Anuncios';
 import { toast } from 'sonner';
 import { useLanguage } from '../hooks/useLanguage';
+import { TradutorInput } from '../components/TradutorInput';
 
 export default function Feed() {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ export default function Feed() {
           const reposted = user ? postReposts.some(r => r.user_id === user.id) : false;
 
           const authorProfile = profilesMap[post.user_id];
-          const authorName = authorProfile?.nome || 'Usuário AcadNet';
+          const authorName = authorProfile?.nome || 'Usuário EduConnect';
           const authorAvatar = authorProfile?.avatar_url || null;
           const authorHandle = authorProfile?.nome 
             ? `@${authorProfile.nome.toLowerCase().replace(/\s+/g, '')}` 
@@ -567,10 +568,9 @@ export default function Feed() {
 
             {/* Input Form */}
             <form onSubmit={handleAdicionarComentario} className="p-4 border-t border-gray-100 flex gap-3 items-center bg-[#fcfcfc]">
-              <input
-                type="text"
+              <TradutorInput
                 value={novoComentario}
-                onChange={(e) => setNovoComentario(e.target.value)}
+                onChange={setNovoComentario}
                 placeholder={translate('commentPlaceholder')}
                 className="flex-1 bg-white border border-gray-100 rounded-xl px-4 py-2.5 text-[12.5px] outline-none focus:border-black transition-colors"
               />

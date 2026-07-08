@@ -1,14 +1,63 @@
+import { useEffect, useState } from 'react';
 import { Bell, Mail, Plus } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import BottomNav from '../components/BottomNav';
 import GeometricBackground from '../components/GeometricBackground';
 import { useLanguage } from '../hooks/useLanguage';
+import { supabase } from '../lib/supabaseClient';
 
 export function MainLayout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { translate } = useLanguage();
+  const [unreadNotificationsCount, setUnreadNotificationsCount] = useState(0);
+
+  useEffect(() => {
+    let channel = null;
+
+    async function fetchUnreadCount() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { count, error } = await supabase
+        .from('notifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', user.id)
+        .eq('is_read', false);
+
+      if (!error && count !== null) {
+        setUnreadNotificationsCount(count);
+      }
+
+      channel = supabase
+        .channel('global-notifications-realtime')
+        .on('postgres_changes', { 
+          event: '*', 
+          table: 'notifications', 
+          filter: `user_id=eq.${user.id}` 
+        }, async () => {
+          const { count: newCount } = await supabase
+            .from('notifications')
+            .select('*', { count: 'exact', head: true })
+            .eq('user_id', user.id)
+            .eq('is_read', false);
+          
+          if (newCount !== null) {
+            setUnreadNotificationsCount(newCount);
+          }
+        })
+        .subscribe();
+    }
+
+    fetchUnreadCount();
+
+    return () => {
+      if (channel) {
+        supabase.removeChannel(channel);
+      }
+    };
+  }, [location.pathname]);
 
   // Mapeamento de rota para chaves de tradução
   const chavePorRota = {
@@ -53,10 +102,15 @@ export function MainLayout({ children }) {
             <div className="flex items-center gap-1">
               <button 
                 onClick={() => navigate('/notificacoes')} 
-                className="p-2.5 rounded-xl hover:bg-gray-50 transition-colors text-gray-600 cursor-pointer"
+                className="p-2.5 rounded-xl hover:bg-gray-50 transition-colors text-gray-600 cursor-pointer relative"
                 title={translate('notificationsTitle')}
               >
                 <Bell size={18} strokeWidth={1.8} />
+                {unreadNotificationsCount > 0 && (
+                  <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white rounded-full text-[9px] font-black flex items-center justify-center animate-pulse">
+                    {unreadNotificationsCount}
+                  </span>
+                )}
               </button>
               <button 
                 onClick={() => navigate('/mensagens')} 

@@ -748,25 +748,66 @@ export default function Buscar() {
               <h2 className="text-[12px] font-extrabold tracking-wider uppercase">{dict.hashtags}</h2>
             </div>
 
-            <div className="bg-white dark:bg-[#12101b] border border-gray-100 dark:border-purple-500/10 rounded-[2.2rem] p-6 shadow-[0_4px_25px_rgba(0,0,0,0.01)] flex flex-wrap gap-2.5">
-              {hashtagsMaisUsadas.map((tag, index) => (
-                <button 
-                  key={index}
+            <div className="bg-white dark:bg-[#12101b] border border-gray-100 dark:border-purple-500/10 rounded-[2.2rem] p-6 shadow-[0_4px_25px_rgba(0,0,0,0.01)] space-y-4">
+              
+              {/* Barra de Pesquisa Rápida de Hashtags */}
+              <div className="relative max-w-md flex items-center gap-2">
+                <div className="relative flex-1">
+                  <input 
+                    type="text"
+                    id="input-hashtag-busca"
+                    placeholder="Pesquisar ou digitar #hashtag..."
+                    className="w-full bg-gray-50/50 dark:bg-[#161424] border border-gray-100 dark:border-purple-500/10 rounded-full pl-10 pr-4 py-2 text-[12px] text-gray-700 dark:text-gray-300 outline-none focus:border-[#8b5cf6] transition-colors"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        let tag = e.target.value.trim();
+                        if (tag) {
+                          if (!tag.startsWith('#')) tag = '#' + tag;
+                          setSearchTerm(tag);
+                          adicionarAoHistorico(tag);
+                        }
+                      }
+                    }}
+                  />
+                  <Search size={13} className="absolute left-4 top-3.5 text-gray-400" />
+                </div>
+                <button
+                  type="button"
                   onClick={() => {
-                    setSearchTerm(tag.nome);
-                    adicionarAoHistorico(tag.nome);
+                    const el = document.getElementById('input-hashtag-busca');
+                    let tag = el ? el.value.trim() : '';
+                    if (tag) {
+                      if (!tag.startsWith('#')) tag = '#' + tag;
+                      setSearchTerm(tag);
+                      adicionarAoHistorico(tag);
+                    }
                   }}
-                  className="flex items-center gap-2.5 bg-gray-50/50 dark:bg-[#161424] border border-gray-100 dark:border-purple-500/10 hover:border-gray-300 dark:hover:border-purple-500/20 text-gray-700 dark:text-gray-300 px-4 py-2.5 rounded-full text-[12.5px] font-semibold transition-all cursor-pointer shadow-sm hover:scale-[1.02]"
+                  className="px-4 py-2 bg-gradient-to-tr from-[#3b82f6] to-[#8b5cf6] text-white rounded-full text-[11px] font-semibold hover:opacity-90 cursor-pointer active:scale-98 transition-all shadow-sm flex-shrink-0"
                 >
-                  <span className="text-gray-900 dark:text-gray-100 font-bold">{tag.nome}</span>
-                  <span className="text-gray-400 dark:text-gray-450 font-light text-[11px]">{tag.quantidade}</span>
+                  Buscar
                 </button>
-              ))}
-              {hashtagsMaisUsadas.length === 0 && (
-                <p className="text-xs text-gray-400 w-full text-center py-2 italic">
-                  Inclua hashtags nos conteúdos dos seus posts para que elas apareçam computadas aqui!
-                </p>
-              )}
+              </div>
+
+              <div className="flex flex-wrap gap-2.5 pt-2">
+                {hashtagsMaisUsadas.map((tag, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => {
+                      setSearchTerm(tag.nome);
+                      adicionarAoHistorico(tag.nome);
+                    }}
+                    className="flex items-center gap-2.5 bg-gray-50/50 dark:bg-[#161424] border border-gray-100 dark:border-purple-500/10 hover:border-gray-300 dark:hover:border-purple-500/20 text-gray-700 dark:text-gray-300 px-4 py-2.5 rounded-full text-[12.5px] font-semibold transition-all cursor-pointer shadow-sm hover:scale-[1.02]"
+                  >
+                    <span className="text-gray-900 dark:text-gray-100 font-bold">{tag.nome}</span>
+                    <span className="text-gray-400 dark:text-gray-450 font-light text-[11px]">{tag.quantidade}</span>
+                  </button>
+                ))}
+                {hashtagsMaisUsadas.length === 0 && (
+                  <p className="text-xs text-gray-400 w-full italic">
+                    Inclua hashtags nos conteúdos dos seus posts para que elas apareçam computadas aqui!
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 

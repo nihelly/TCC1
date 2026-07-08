@@ -1,5 +1,5 @@
 -- ============================================================
--- ACADNET — SCRIPT COMPLETO DE CRIAÇÃO DO BANCO DE DADOS
+-- EDUCONNECT — SCRIPT COMPLETO DE CRIAÇÃO DO BANCO DE DADOS
 -- Execute este script no SQL Editor do Supabase Dashboard
 -- ============================================================
 
@@ -8,7 +8,7 @@
 -- ============================================================
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  nome TEXT NOT NULL DEFAULT 'Usuário AcadNet',
+  nome TEXT NOT NULL DEFAULT 'Usuário EduConnect',
   matricula TEXT,
   papel TEXT NOT NULL DEFAULT 'aluno',
   bio TEXT DEFAULT '',
@@ -36,7 +36,7 @@ BEGIN
     COALESCE(NEW.raw_user_meta_data->>'nome', split_part(NEW.email, '@', 1)),
     COALESCE(NEW.raw_user_meta_data->>'matricula', LPAD(FLOOR(RANDOM() * 999999 + 1)::TEXT, 6, '0')),
     COALESCE(NEW.raw_user_meta_data->>'papel', 'aluno'),
-    'Estudante do AcadNet.'
+    'Estudante do EduConnect.'
   );
   RETURN NEW;
 END;
